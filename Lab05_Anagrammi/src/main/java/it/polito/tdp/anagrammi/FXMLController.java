@@ -1,6 +1,7 @@
 package it.polito.tdp.anagrammi;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -48,15 +49,22 @@ public class FXMLController {
     	}
     	
     	Set<String> anagrammi=this.m.ricorsione(s);
+    	List<String> correti = new LinkedList();
+    	List<String> errati = new LinkedList();
     	for(String str : anagrammi) {
     		boolean correto= this.m.isCorrect(str);
     		if(correto==true) {
-    			txtCorreti.setText(str);
+    			correti.add(str);
     		}else if (correto==false) {
-    			txtErrati.setText(str);
+    			errati.add(str);
     		}
     	}
-    	
+    	if(!(correti.isEmpty())) {
+    		this.txtCorreti.setText(correti.toString());
+    	}
+    	if(!(errati.isEmpty())) {
+    		this.txtErrati.setText(errati.toString());
+    	}
     	
     }
 
